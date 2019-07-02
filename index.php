@@ -24,6 +24,9 @@ function getWordsFromString($string)
 }
 
 $text = $_POST['text'] ?? '';
+
+if (empty($text)) die("Исходный текст пуст");
+
 $words = getWordsFromString($text);
 
 $result = array();
