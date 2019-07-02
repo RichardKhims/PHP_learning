@@ -14,8 +14,7 @@
 
 <?php
 
-function getWordsFromString($string)
-{
+function getWordsFromString($string) {
     if (preg_match_all("/\b(\w+)\b/ui", $string, $matches)) {
         return $matches[1];
     }
@@ -36,16 +35,16 @@ foreach ($words as $word) {
     else $result[$word]++;
 }
 
-echo "Исходный текст: {$text}".PHP_EOL;
-echo "Результат".PHP_EOL;
+echo "<p>Исходный текст: {$text}</p>".PHP_EOL;
+echo "<p>Результат</p>".PHP_EOL;
 
 foreach ($result as $key => $count) {
-    echo "{$key}:{$count}".PHP_EOL;
+    echo "{$key}:{$count}<br>".PHP_EOL;
 }
 
 $words_count = count($words);
 $uniq_words_count = count($result);
 
-echo "Всего слов в тексте: {$words_count}".PHP_EOL;
-echo "Уникальных слов в тексте: {$uniq_words_count}".PHP_EOL;
+echo "<p>Всего слов в тексте: {$words_count}</p>".PHP_EOL;
+echo "<p>Уникальных слов в тексте: {$uniq_words_count}</p>".PHP_EOL;
 ?>
