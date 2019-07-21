@@ -14,6 +14,8 @@
 
 <?php
 
+require_once 'db_config.php';
+
 function getWordsFromString($string) {
     if (preg_match_all("/\b(\w+)\b/ui", $string, $matches)) {
         return $matches[1];
@@ -59,7 +61,7 @@ function makeCsvFromResult($result, $words_count, $uniq_words_count) {
 $text = $_POST['text'] ?? '';
 if (empty($text)) die("Текст не задан");
 
-$conn = new PDO('mysql:host=localhost:3306;dbname=txt_to_words', 'root', '');
+$conn = new PDO("{$db_type}:host={$db_host}:{$db_port};dbname={$db_name}", $db_user, $db_passwd);
 $sth = $conn->prepare("INSERT INTO `texts` SET `text` = :text");
 $sth->execute(array('text' => $text));
 
