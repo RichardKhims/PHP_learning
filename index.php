@@ -82,10 +82,4 @@ saveToCsv($csv_text, "{$hash_value}.csv");
 
 echo "<br>";
 echo "<a href='result.php?hash={$hash_value}'>Результат</a>";
-
-//$file = $_FILES['file']['tmp_name'] ?? '';
-//if (file_exists($file)) {
-//    $out_file = makeCsvFromText(file_get_contents($_FILES['file']['tmp_name']) ?? '', 'from_file.csv');
-//    if (!empty($out_file)) echo "<a href='{$out_file}'>Результат 2</a>";
-//}
 ?>
