@@ -28,8 +28,9 @@ function getResult($words)
 {
     $result = array();
     foreach ($words as $word) {
-        if (!array_key_exists($word, $result)) $result[$word] = 1;
-        else $result[$word]++;
+        $lword = mb_strtolower($word);
+        if (!array_key_exists($lword, $result)) $result[$lword] = 1;
+        else $result[$lword]++;
     }
 
     return $result;
@@ -43,7 +44,7 @@ function saveToCsv($text, $filename) {
 
 function makeCsvFromResult($result, $words_count, $uniq_words_count) {
     $csv_array = array();
-    array_push($csv_array, "Кол-во слов;{$words_count}", "Кол-во уникальных слов;{$uniq_words_count}");
+//    array_push($csv_array, "Кол-во слов;{$words_count}", "Кол-во уникальных слов;{$uniq_words_count}");
     foreach ($result as $key => $count) {
         array_push($csv_array,"$key;{$count}");
     }

@@ -25,7 +25,7 @@ echo '</tr>';
 
 echo '<tr>';
 echo '<td>Текст</td>';
-echo '<td>'.$text.'</td>';
+echo '<td>'.$text.'...</td>';
 echo '</tr>';
 
 echo '<tr>';
