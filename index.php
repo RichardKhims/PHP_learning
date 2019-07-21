@@ -51,7 +51,6 @@ function makeCsvFromResult($result, $words_count, $uniq_words_count) {
     return join("\n", $csv_array);
 }
 
-
 $text = $_POST['text'] ?? '';
 if (empty($text)) die("Текст не задан");
 
