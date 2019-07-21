@@ -35,15 +35,9 @@ function getResult($words)
     return $result;
 }
 
-function saveResult($result, $words_count, $uniq_words_count, $filename) {
+function saveToCsv($text, $filename) {
     $file = fopen($filename, "w");
-
-    fwrite($file, "Кол-во слов;{$words_count}\n");
-    fwrite($file, "Кол-во уникальных слов;{$uniq_words_count}\n");
-    foreach ($result as $key => $count) {
-        fwrite($file, "$key;{$count}\n");
-    }
-
+    fwrite($file, $text);
     fclose($file);
 }
 
@@ -54,7 +48,7 @@ function makeCsvFromResult($result, $words_count, $uniq_words_count) {
         array_push($csv_array,"$key;{$count}");
     }
 
-    return join('\n', $csv_array);
+    return join("\n", $csv_array);
 }
 
 
@@ -74,13 +68,17 @@ $uniq_words_count = count($result);
 $last_id = $conn->lastInsertId();
 $hash_value = uniqid($last_id);
 
+$csv_text = makeCsvFromResult($result, $words_count, $uniq_words_count);
+
 $sth = $conn->prepare("INSERT INTO `results` SET `text_id` = :text_id, `hash_value` = :hash_value, `result_csv` = :result_csv, `words_count` = :words_count, `uniq_words_count` = :uniq_words_count");
 $sth->execute(array(
     'text_id' => $last_id,
     'hash_value' => $hash_value,
-    'result_csv' => makeCsvFromResult($result, $words_count, $uniq_words_count),
+    'result_csv' => $csv_text,
     'words_count' => $words_count,
     'uniq_words_count' => $uniq_words_count));
+
+saveToCsv($csv_text, "{$hash_value}.csv");
 
 echo "<br>";
 echo "<a href='result.php?hash={$hash_value}'>Результат</a>";
